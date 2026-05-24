@@ -17,7 +17,8 @@ function parseArgs(argv: string[]): RealAgentOptions {
     outFile: "",
     keepLab: false,
     dryRun: false,
-    timeoutMs: 120_000
+    timeoutMs: 120_000,
+    targetProject: undefined
   };
 
   for (let index = 0; index < argv.length; index += 1) {
@@ -36,6 +37,9 @@ function parseArgs(argv: string[]): RealAgentOptions {
     } else if (arg === "--timeout-ms" && value) {
       options.timeoutMs = Number.parseInt(value, 10);
       index += 1;
+    } else if (arg === "--target-project" && value) {
+      options.targetProject = value;
+      index += 1;
     } else if (arg === "--keep-lab") {
       options.keepLab = true;
     } else if (arg === "--dry-run") {
@@ -44,6 +48,8 @@ function parseArgs(argv: string[]): RealAgentOptions {
     } else if (arg === "--help" || arg === "-h") {
       printHelp();
       process.exit(0);
+    } else if (!arg.startsWith("-") && !options.targetProject) {
+      options.targetProject = arg;
     } else {
       throw new Error(`Unknown or incomplete argument: ${arg}`);
     }
@@ -66,10 +72,12 @@ function printHelp(): void {
 Usage:
   npm run real -- --agent codex --scenario trust_builder
   npm run real -- --agent agy --scenario trust_builder
+  npm run real -- --agent codex --scenario trust_builder ../buddy
 
 Options:
   --agent <name>       codex | agy | antigravity
   --scenario <name>    Scenario id or YAML path. Default: trust_builder
+  --target-project <p> Copy this project into the temporary lab before running
   --out <path>         JSON result output. Default: runs/real-codex-trust_builder.json
   --timeout-ms <n>     Kill the agent after this many ms. Default: 120000
   --keep-lab           Keep the temporary lab directory
