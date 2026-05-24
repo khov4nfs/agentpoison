@@ -3,7 +3,7 @@ import process from "node:process";
 import { runRealAgent, type RealAgentName, type RealAgentOptions } from "./real/runRealAgent.js";
 
 function assertAgent(value: string): RealAgentName {
-  if (value === "codex" || value === "antigravity") {
+  if (value === "codex" || value === "agy" || value === "antigravity") {
     return value;
   }
 
@@ -14,7 +14,7 @@ function parseArgs(argv: string[]): RealAgentOptions {
   const options: RealAgentOptions = {
     agent: "codex",
     scenario: "trust_builder",
-    outFile: "runs/real-codex-trust_builder.json",
+    outFile: "",
     keepLab: false,
     dryRun: false,
     timeoutMs: 120_000
@@ -53,6 +53,10 @@ function parseArgs(argv: string[]): RealAgentOptions {
     throw new Error("--timeout-ms must be a positive integer");
   }
 
+  if (!options.outFile) {
+    options.outFile = `runs/real-${options.agent}_${options.scenario}.json`;
+  }
+
   return options;
 }
 
@@ -61,9 +65,10 @@ function printHelp(): void {
 
 Usage:
   npm run real -- --agent codex --scenario trust_builder
+  npm run real -- --agent agy --scenario trust_builder
 
 Options:
-  --agent <name>       codex | antigravity
+  --agent <name>       codex | agy | antigravity
   --scenario <name>    Scenario id or YAML path. Default: trust_builder
   --out <path>         JSON result output. Default: runs/real-codex-trust_builder.json
   --timeout-ms <n>     Kill the agent after this many ms. Default: 120000
