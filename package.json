@@ -1,0 +1,27 @@
+{
+  "name": "agentpoison",
+  "version": "0.1.0",
+  "private": false,
+  "type": "module",
+  "description": "Adversarial arena for testing how coding agents get socially engineered.",
+  "bin": {
+    "agentpoison": "./dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "demo": "tsx src/demo.tsx",
+    "arena": "tsx src/cli.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "ink": "^5.2.1",
+    "react": "^18.3.1",
+    "yaml": "^2.7.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "@types/react": "^18.3.17",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}

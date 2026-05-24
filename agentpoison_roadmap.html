@@ -1,0 +1,202 @@
+
+<style>
+:root { --gap: 10px; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+
+.roadmap { padding: 1.25rem 0; }
+.phase-row { display: grid; grid-template-columns: 110px 1fr; gap: 0 20px; margin-bottom: 28px; }
+.phase-label { display: flex; flex-direction: column; align-items: flex-end; padding-top: 4px; }
+.phase-tag { font-size: 11px; font-weight: 500; padding: 3px 8px; border-radius: 4px; white-space: nowrap; margin-bottom: 4px; }
+.phase-week { font-size: 11px; color: var(--color-text-secondary); text-align: right; }
+
+.p1 { background: #EEEDFE; color: #3C3489; }
+.p2 { background: #E1F5EE; color: #085041; }
+.p3 { background: #FAEEDA; color: #633806; }
+.p4 { background: #FAECE7; color: #711B13; }
+
+.cards { display: flex; flex-direction: column; gap: var(--gap); }
+.card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 10px 14px; }
+.card-head { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+.card-title { font-size: 13px; font-weight: 500; color: var(--color-text-primary); }
+.card-sub { font-size: 12px; color: var(--color-text-secondary); line-height: 1.5; }
+.badge { font-size: 10px; font-weight: 500; padding: 2px 6px; border-radius: 3px; }
+.b-code { background: var(--color-background-secondary); color: var(--color-text-secondary); font-family: var(--font-mono); }
+.b-fire { background: #FAECE7; color: #993C1D; }
+.b-warn { background: #FAEEDA; color: #633806; }
+.b-ok   { background: #E1F5EE; color: #085041; }
+
+.divider { border: none; border-top: 0.5px dashed var(--color-border-tertiary); margin: 4px 0; }
+
+.metric-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 28px; }
+.metric { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 10px 12px; }
+.metric-n { font-size: 22px; font-weight: 500; color: var(--color-text-primary); }
+.metric-l { font-size: 11px; color: var(--color-text-secondary); margin-top: 2px; }
+
+.section-title { font-size: 11px; font-weight: 500; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: .06em; margin: 0 0 10px; }
+
+.timeline-bar { display: flex; height: 6px; border-radius: 3px; overflow: hidden; margin-bottom: 24px; }
+.tb-seg { transition: width .3s; }
+
+.goal-list { display: flex; flex-direction: column; gap: 6px; }
+.goal-item { display: flex; align-items: flex-start; gap: 8px; font-size: 12px; color: var(--color-text-secondary); }
+.goal-icon { font-size: 14px; margin-top: 1px; flex-shrink: 0; }
+</style>
+
+<div class="roadmap">
+
+  <div class="metric-row">
+    <div class="metric">
+      <div class="metric-n">8 tuần</div>
+      <div class="metric-l">MVP → public</div>
+    </div>
+    <div class="metric">
+      <div class="metric-n">TypeScript</div>
+      <div class="metric-l">stack chính</div>
+    </div>
+    <div class="metric">
+      <div class="metric-n">solo</div>
+      <div class="metric-l">1 người build</div>
+    </div>
+  </div>
+
+  <p class="section-title">Timeline tổng thể</p>
+  <div class="timeline-bar" style="margin-bottom: 6px;">
+    <div class="tb-seg" style="width:25%;background:#534AB7;"></div>
+    <div class="tb-seg" style="width:25%;background:#0F6E56;"></div>
+    <div class="tb-seg" style="width:25%;background:#854F0B;"></div>
+    <div class="tb-seg" style="width:25%;background:#993C1D;"></div>
+  </div>
+  <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--color-text-secondary);margin-bottom:24px;">
+    <span>W1–2 core</span><span>W3–4 agents</span><span>W5–6 demo</span><span>W7–8 launch</span>
+  </div>
+
+  <p class="section-title">Kế hoạch chi tiết</p>
+
+  <!-- Phase 1 -->
+  <div class="phase-row">
+    <div class="phase-label">
+      <span class="phase-tag p1">Phase 1</span>
+      <span class="phase-week">Tuần 1–2</span>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <div class="card-head">
+          <span class="badge b-ok">day 1</span>
+          <span class="card-title">Public repo flag-planting</span>
+          <span class="badge b-fire">làm ngay</span>
+        </div>
+        <div class="card-sub">Tạo repo public, push commit đầu tiên dù chỉ là <code style="font-size:11px">README.md</code> với tagline + "coming soon". Mục tiêu: cắm cờ sớm để Google index trước nếu có ai đang nghĩ tới idea tương tự.</div>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <span class="badge b-code">arena/core</span>
+          <span class="card-title">Arena runner</span>
+        </div>
+        <div class="card-sub">CLI nhận 2 agent config, orchestrate conversation loop, log toàn bộ interaction ra JSON. Chỉ cần chạy được, chưa cần đẹp.</div>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <span class="badge b-code">arena/detect</span>
+          <span class="card-title">Attack success detector</span>
+        </div>
+        <div class="card-sub">Rule-based: blue agent có gọi tool ngoài scope không? Đọc file ngoài project dir không? Exfiltrate string ra ngoài không? Flag ngay khi phát hiện.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Phase 2 -->
+  <div class="phase-row">
+    <div class="phase-label">
+      <span class="phase-tag p2">Phase 2</span>
+      <span class="phase-week">Tuần 3–4</span>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <div class="card-head">
+          <span class="badge b-code">agents/red</span>
+          <span class="card-title">5 red agent đầu tiên</span>
+          <span class="badge b-fire">ưu tiên cao</span>
+        </div>
+        <div class="card-sub">
+          Mỗi agent là 1 YAML file định nghĩa personality + attack chain. Build theo thứ tự demo-first:<br>
+          <code style="font-size:11px">trust_builder</code> → <code style="font-size:11px">memory_poisoner</code> → <code style="font-size:11px">tool_hijacker</code> → <code style="font-size:11px">mcp_impersonator</code> → <code style="font-size:11px">salami_slicer</code>
+          <br><span style="font-size:11px">Bắt đầu với <code style="font-size:11px">trust_builder</code>: dễ demo nhất, hit đúng tâm lý "nó tin từng bước nhỏ, đến lúc blue agent nhận ra thì đã muộn". Giữ <code style="font-size:11px">salami_slicer</code> cho sau vì phức tạp hơn.</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <span class="badge b-code">agents/blue</span>
+          <span class="card-title">Blue agent adapters</span>
+        </div>
+        <div class="card-sub">Wrapper cho Claude Code, OpenAI Agents SDK, LangChain. Mỗi adapter ~50 dòng TypeScript, chuẩn hoá interface.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Phase 3 -->
+  <div class="phase-row">
+    <div class="phase-label">
+      <span class="phase-tag p3">Phase 3</span>
+      <span class="phase-week">Tuần 5–6</span>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <div class="card-head">
+          <span class="badge b-fire">viral asset</span>
+          <span class="card-title">Demo video make-or-break</span>
+          <span class="badge b-warn">&lt;90s</span>
+        </div>
+        <div class="card-sub">TypeScript + <code style="font-size:11px">ink</code> để có terminal UI đẹp mà không cần web. Dùng <code style="font-size:11px">asciinema</code> record rồi convert sang GIF. Clip dưới 90 giây, không voice-over, chỉ có attack xảy ra và bị flag realtime.</div>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <span class="badge b-ok">acceptance</span>
+          <span class="card-title">Demo acceptance criteria</span>
+        </div>
+        <div class="card-sub">Người xem phải hiểu trong 10 giây đầu: red agent đang tạo niềm tin, blue agent làm theo, detector flag ngay khi boundary bị vượt. Nếu video không tự giải thích được khi mute, chưa đạt launch quality.</div>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <span class="badge b-code">docs/</span>
+          <span class="card-title">Attack taxonomy</span>
+        </div>
+        <div class="card-sub">Markdown docs mô tả từng attack vector với example thật. Đây là "content moat" — người ta cite, share, link tới. Quan trọng không kém code.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Phase 4 -->
+  <div class="phase-row">
+    <div class="phase-label">
+      <span class="phase-tag p4">Phase 4</span>
+      <span class="phase-week">Tuần 7–8</span>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <div class="card-head">
+          <span class="badge b-fire">launch</span>
+          <span class="card-title">README + launch sequence</span>
+        </div>
+        <div class="card-sub">README aggressive theo formula đã phân tích: GIF trước, fear-driven problem, 1-line install, holy-shit examples. Post HN + X cùng ngày, không split.</div>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <span class="badge b-warn">optional</span>
+          <span class="card-title">Web replay viewer</span>
+        </div>
+        <div class="card-sub">Nếu còn thời gian: upload JSON log → xem replay attack trên browser. Không bắt buộc cho v1 nhưng giúp share-ability tăng mạnh.</div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider" style="margin: 8px 0 20px;">
+
+  <p class="section-title">Quy tắc solo dev để không burn out</p>
+  <div class="goal-list">
+    <div class="goal-item"><i class="ti ti-ban goal-icon" aria-hidden="true"></i>Không build feature nào không trực tiếp phục vụ demo video. Mọi thứ khác là backlog.</div>
+    <div class="goal-item"><i class="ti ti-clock goal-icon" aria-hidden="true"></i>Ngày đầu phải có repo public + commit đầu tiên. Sau đó commit nhỏ mỗi ngày để tạo momentum và proof-of-work.</div>
+    <div class="goal-item"><i class="ti ti-message-circle goal-icon" aria-hidden="true"></i>Post dev log ngắn trên X mỗi tuần — "đang build X, gặp vấn đề Y" — build audience trước launch.</div>
+    <div class="goal-item"><i class="ti ti-target goal-icon" aria-hidden="true"></i>Thứ tự ưu tiên tuyệt đối: demo dưới 90 giây &gt; docs &gt; code quality &gt; features.</div>
+  </div>
+</div>
